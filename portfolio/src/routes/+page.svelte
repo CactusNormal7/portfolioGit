@@ -6,7 +6,7 @@
     import linkedinlogo from "$lib/linkedin.svg"
     import githublogo from "$lib/github.svg"
     import twitterlogo from "$lib/twitter.svg"
-    import emailjs from "@emailjs/browser/"
+    // import emailjs from "@emailjs/browser/"
     
     let circle: HTMLDivElement;
     let buttonviewmore: HTMLButtonElement;
@@ -17,14 +17,14 @@
     let discordlogo: HTMLImageElement;
     let main:HTMLElement;
 
-    function sendEmail(e:any) {
-        emailjs.sendForm("service_7yknyyb","template_ln2xu7q",e.target, "tEQQNmweD6fz6uf3s")
-        .then((result) => {
-            console.log("succes", result.text);
-        }, (error) => {
-            console.log("failed", error.text);
-        });
-    }
+    // function sendEmail(e:any) {
+    //     emailjs.sendForm("service_7yknyyb","template_ln2xu7q",e.target, "tEQQNmweD6fz6uf3s")
+    //     .then((result) => {
+    //         console.log("succes", result.text);
+    //     }, (error) => {
+    //         console.log("failed", error.text);
+    //     });
+    // }
 
     export let data: PageData;
     $: ({ projects } = data);
@@ -144,7 +144,7 @@
 
     <div style="width: 100vw; height : 50vh; display:flex; justify-content:center; ">
         <div id="contactdivcontainer">
-            <form on:submit|preventDefault={sendEmail} style="width: 100%; height: 80%;">
+            <form style="width: 100%; height: 80%;">
                 <div style="display:flex; justify-content:center; height: 20%; gap:10%" >
                     <input name="from_name" placeholder="name" class="halfinputcontact" type="text">
                     <input name="email" placeholder="email" class="halfinputcontact" type="text">
