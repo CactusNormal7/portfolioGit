@@ -1,6 +1,10 @@
 <script lang="ts">
     import { each, onMount } from "svelte/internal";
     import type { PageData } from "./$types";
+    import discordimg from "$lib/discord.svg"
+    import linkedinlogo from "$lib/linkedin.svg"
+    import githublogo from "$lib/github.svg"
+    
     
     let circle: HTMLDivElement;
     let buttonviewmore: HTMLButtonElement;
@@ -8,6 +12,8 @@
     let allcard: NodeListOf<HTMLElement>;
     let divDesc :NodeListOf<HTMLDivElement>;
     let linkButtons :NodeListOf<HTMLButtonElement>;
+    let discordlogo: HTMLImageElement;
+    let main:HTMLElement;
 
 
 
@@ -18,6 +24,7 @@
         circle.style.left = `${e.clientX - 50}px`;
         circle.style.top = `${e.clientY - 40}px`;
     }
+
 
     onMount(() => {
         allcard = projectlistdiv.querySelectorAll(".cardivall")
@@ -44,8 +51,9 @@
     
 </script>
 
-<main id="main" on:mousemove={mouseHandler}>
+<main id="main" bind:this={main} on:mousemove={mouseHandler}>
     <div style="color: white;" />
+    <div class="circletittle"></div>
     <div class="containerAll">
         <div bind:this={circle} id="circle" />  
         <div id="mainTittleContainer">
@@ -54,20 +62,33 @@
         </div>
     </div>
 
-
-
     <!-- about me -->
     <div>
         <div style="width: 100vw; display: flex; justify-content: center; margin-top : 100px;">
             <h1 id="aboutmesectiontittle">About me</h1>
             <div class="traithorizontal1"></div>
         </div>
+        <div style="width:100vw; display: flex; justify-content:center; margin-top:50px;">
+            <div style="width:70%;display: flex; justify-content:center;">
+                <div class="socialmediadivlogo" style="display: flex; flex-direction: column; justify-content:center; align-items:center">
+                    <img id="discordlogo" src="{discordimg}" alt="" style="max-width:60px">
+                    <h4 id="discordname" class="socialmedia">CactusNormal</h4>
+                </div>
+                <div class="socialmediadivlogo" style="display: flex; flex-direction: column; justify-content:center; align-items:center">
+                    <img id="discordlogo" src="{linkedinlogo}" alt="" style="max-width:60px">
+                    <h4 id="discordname" class="socialmedia">CactusNormal</h4>
+                </div>
+                <div class="socialmediadivlogo" style="display: flex; flex-direction: column; justify-content:center; align-items:center">
+                    <img id="discordlogo" src="{githublogo}" alt="" style="max-width:60px">
+                    <h4 id="discordname" class="socialmedia">CactusNormal</h4>
+                </div>
+                
+            </div>
+        </div>
         <div style="display: flex; justify-content: center;">
             <div class="traithorizontal2"></div>
         </div>
-
     </div>
-
     <!-- about me  -->
 
     <!-- project cards -->
@@ -85,6 +106,7 @@
                 </div>
             </div>
             {/each}
+            
         </div>
     <!-- project cards -->
     </div>
@@ -99,11 +121,45 @@
         overflow-x: hidden;
     }
 
+
+    .socialmediadivlogo {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    .socialmedia {
+        visibility: hidden;
+        font-family: "Poppins", sans-serif;
+        color: white;
+        transition: 2s;
+        padding: 0;
+        margin: 0;
+    }
+
+    #discordlogo:hover + #discordname {
+       visibility: visible;
+    }
+
+    #discordname:hover {
+        visibility: visible;
+    }
+
     .containerAll {
         padding-top: 10vh;
         display: flex;
         justify-content: center;
         width: 100vw;
+    }
+
+    .circletittle {
+        width: 400px;
+        height: 400px;
+        border-radius: 500px;
+        position: absolute;
+        background-color: white;
+        left: 48vw;
+        mix-blend-mode: difference;
+        top: 40px;
     }
 
     .traithorizontal1 {
@@ -234,7 +290,7 @@
         width: 292px;
         height: 150px;
         margin-left:20px;
-        transition: 0.6s ease;
+        transition: 0.6s ease-out;
         margin-right: 20px;
         margin-top: 30px;
         flex-direction: column;
