@@ -142,7 +142,7 @@
         <div class="traithorizontal1"></div>
     </div>
 
-    <div style="width: 100vw; height : 50vh; display:flex; justify-content:center; ">
+    <div style="width: 100vw; height : 80vh; display:flex; justify-content:center; ">
         <div id="contactdivcontainer">
             <form style="width: 100%; height: 80%;">
                 <div style="display:flex; justify-content:center; height: 20%; gap:10%" >
