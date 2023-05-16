@@ -1,10 +1,12 @@
+
 <script lang="ts">
     import { each, onMount } from "svelte/internal";
     import type { PageData } from "./$types";
     import discordimg from "$lib/discord.svg"
     import linkedinlogo from "$lib/linkedin.svg"
     import githublogo from "$lib/github.svg"
-    
+    import twitterlogo from "$lib/twitter.svg"
+    import emailjs from "@emailjs/browser/"
     
     let circle: HTMLDivElement;
     let buttonviewmore: HTMLButtonElement;
@@ -15,14 +17,21 @@
     let discordlogo: HTMLImageElement;
     let main:HTMLElement;
 
-
+    function sendEmail(e:any) {
+        emailjs.sendForm("service_7yknyyb","template_ln2xu7q",e.target, "tEQQNmweD6fz6uf3s")
+        .then((result) => {
+            console.log("succes", result.text);
+        }, (error) => {
+            console.log("failed", error.text);
+        });
+    }
 
     export let data: PageData;
     $: ({ projects } = data);
 
     function mouseHandler(e: any) {
         circle.style.left = `${e.clientX - 50}px`;
-        circle.style.top = `${e.clientY - 40}px`;
+        circle.style.top = `${e.clientY - 40 + window.scrollY}px`;
     }
 
 
@@ -47,9 +56,8 @@
             linkButtons[idclicked].style.transition = "0s"
         }
     }
-
-    
 </script>
+
 
 <main id="main" bind:this={main} on:mousemove={mouseHandler}>
     <div style="color: white;" />
@@ -69,7 +77,7 @@
             <div class="traithorizontal1"></div>
         </div>
         <div style="width:100vw; display: flex; justify-content:center; margin-top:50px;">
-            <div style="width:70%;display: flex; justify-content:center;">
+            <div style="display: flex; justify-content:center;">
                 <div class="socialmediadivlogo" style="display: flex; flex-direction: column; justify-content:center; align-items:center">
                     <img id="discordlogo" src="{discordimg}" alt="" style="max-width:60px">
                     <h4 id="discordname" class="socialmedia">CactusNormal</h4>
@@ -82,11 +90,28 @@
                     <img id="discordlogo" src="{githublogo}" alt="" style="max-width:60px">
                     <h4 id="discordname" class="socialmedia">CactusNormal</h4>
                 </div>
-                
+                <div class="socialmediadivlogo" style="display: flex; flex-direction: column; justify-content:center; align-items:center">
+                    <img id="discordlogo" src="{twitterlogo}" alt="" style="max-width:60px">
+                    <h4 id="discordname" class="socialmedia">CactusNormal</h4>
+                </div>
+            </div>
+            <div style="height: 180px;width:0px; border:2px solid;border-color:white;"></div>
+            <div id="skillsdiv">
+                <div style="width: 100%; display:flex;justify-content:center;">
+                    <h2 class="skillstittle">Skills</h2>
+                </div>
+                <div id="skillsdivtext">
+                    <h3 style="grid-column: 1; grid-row: 1;" class="skilltxt">html</h3>
+                    <h3 style="grid-column: 2; grid-row: 2;" class="skilltxt">css</h3>
+                    <h3 style="grid-column: 2; grid-row: 1;" class="skilltxt">typescript</h3>
+                    <h3 style="grid-column: 1; grid-row: 2;" class="skilltxt">golang</h3>
+                </div>
             </div>
         </div>
-        <div style="display: flex; justify-content: center;">
-            <div class="traithorizontal2"></div>
+
+        <div style="width: 100vw; display: flex; justify-content: center; ">
+            <h1 id="aboutmesectiontittle">Projects</h1>
+            <div class="traithorizontal1"></div>
         </div>
     </div>
     <!-- about me  -->
@@ -110,6 +135,34 @@
         </div>
     <!-- project cards -->
     </div>
+
+    <!-- Contact -->
+    <div style="width: 100vw; display: flex; justify-content: center; padding-top: 80px">
+        <h1 id="aboutmesectiontittle">Contact</h1>
+        <div class="traithorizontal1"></div>
+    </div>
+
+    <div style="width: 100vw; height : 50vh; display:flex; justify-content:center; ">
+        <div id="contactdivcontainer">
+            <form on:submit|preventDefault={sendEmail} style="width: 100%; height: 80%;">
+                <div style="display:flex; justify-content:center; height: 20%; gap:10%" >
+                    <input name="from_name" placeholder="name" class="halfinputcontact" type="text">
+                    <input name="email" placeholder="email" class="halfinputcontact" type="text">
+                </div>
+                <div style="display:flex; justify-content:center;">
+                    <input name="object" placeholder="object" class="inputcontact" type="text">
+                </div>
+                <div style="display:flex; justify-content:center;">
+                    <textarea name="content" id="contentarea" cols="80" rows="10" placeholder="content"></textarea>
+                </div>
+                <div style="display: flex;">
+                    <button id="submitemailbutton" type="submit">SEND</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Contact -->
+
 </main>
     
 <style>
@@ -121,6 +174,145 @@
         overflow-x: hidden;
     }
 
+
+    .skillstittle {
+        font-family: "Poppins", sans-serif;
+        color: white;
+    }
+    .skilltxt {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        color: white;
+    }
+
+    #submitemailbutton{
+        background-color: black;
+        border: 3px solid;
+        border-color: white;
+        font-size: 20px;
+        padding: 4px;
+        transition: 0.3s ease;
+        color: white;
+        margin-left: 18.5%;
+        margin-top: 30px;
+        font-weight: bolder;
+    }
+
+    #submitemailbutton:hover {
+        background-color: white;
+        border-color: black;
+        color: black;
+    }
+
+    #contentarea {
+        background-color: transparent;
+        color: white;
+        font-family: "Poppins",sans-serif;
+        transition: 0.3s ease;
+        border: 3px solid;
+        font-weight: bolder;
+        border-color: white;
+        width:62%;
+    }
+
+    #contentarea:hover {
+        box-shadow: 10px 10px rgb(180, 180, 180);
+    }
+
+    .inputcontact {
+        background-color: transparent;
+        font-weight: bolder;
+        font-family: "Poppins",sans-serif;
+        width: 60.5%;
+        margin-bottom: 3%;
+        transition: 0.3s ease;
+        color: white;
+        border: 3px solid;
+        border-color: white;
+        height: 45%;
+        padding: 1%;
+    }
+
+    #contentarea:focus {
+        background-color: white;
+        box-shadow: 10px 10px rgb(37, 37, 37);
+        color: black;
+    }
+
+    .halfinputcontact {
+        background-color: transparent;
+        font-weight: bolder;
+        font-family: "Poppins",sans-serif;
+        width: 25%;
+        transition: 0.3s ease;
+        color: white;
+        border: 3px solid;
+        border-color: white;
+        height: 45%;
+        padding: 0.5%;
+    }
+
+
+    .halfinputcontact:hover {
+        box-shadow: 10px 10px rgb(180, 180, 180);
+    }
+
+    .inputcontact:hover {
+        box-shadow: 10px 10px rgb(180, 180, 180);
+    }
+
+    .halfinputcontact:focus {
+        background-color: white;
+        box-shadow: 10px 10px rgb(37, 37, 37);
+        color: black;
+    }
+    .inputcontact:focus {
+        background-color: white;
+        box-shadow: 10px 10px rgb(37, 37, 37);
+        color: black;
+    }
+
+    #skillsdivtext {
+        margin: 0;
+        column-gap: 40px;
+        max-width: 80%;
+        padding: 0;
+        display: grid;
+    }
+
+    ::placeholder {
+        color: white;
+        padding-left: 2%;
+        font-family: "Poppins",sans-serif;
+    }
+
+    input { outline: none; }
+    textarea { outline: none; }
+
+    #contactdivcontainer {
+        width: 70%;
+        justify-content: center;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 3px solid;
+        border-color: white;
+        margin-top:3vh;
+    }
+
+    #skillsdiv {
+        margin-top: 10px;
+        align-items:center;
+        flex-direction: column;
+        display: flex;
+        margin-left: 60px;
+        width: 20%;
+        height: 160px;
+        border: 3px solid;
+        border-color: white;
+    }
 
     .socialmediadivlogo {
         margin-left: 30px;
@@ -172,15 +364,6 @@
         height: 0px;
     }
 
-    .traithorizontal2 {
-        width: 71.5vw;
-        margin-left: 2.5vw;
-        margin-right: 2.5vw;
-        border: 2px solid;
-        margin-top: 42px;
-        border-color: white;
-        height: 0px;
-    }
 
     #aboutmesectiontittle {
         font-family: "Poppins",sans-serif;
