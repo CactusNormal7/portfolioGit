@@ -17,4 +17,5 @@ model Post {
   desc  String
   repo  String
   image String
+  linksite String
 }
