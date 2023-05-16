@@ -21,9 +21,21 @@
 
     const viewMoreOnClick = (idclicked: number, idclick: string) => {
         if(allcard[idclicked].querySelector<HTMLButtonElement>(`#${idclick}`)?.getAttribute("data-test") === "false") {
-            allcard[idclicked].querySelector<HTMLDivElement>(".cardDivTop")!.style.height = "300px";
+            allcard[idclicked].querySelector<HTMLDivElement>(".cardDivTop")!.style.height = "330px";
             allcard[idclicked].querySelector<HTMLButtonElement>(`#${idclick}`)?.setAttribute("data-test", "true");
             let divDesc = document.createElement("div")
+            let linkButton = document.createElement("button")
+            linkButton.innerText = "open site"
+            linkButton.style.backgroundColor = "black"
+            linkButton.style.border = "3px solid"
+            linkButton.style.borderColor = "white"
+            linkButton.style.fontSize = "20px";
+            linkButton.style.padding = "4px";
+            linkButton.style.color = "white";
+            linkButton.style.marginTop = "30px";
+            linkButton.style.transition = "2s ease"
+            linkButton.style.fontWeight = "bolder";
+            
             divDesc.innerText = projects[idclicked].desc
             divDesc.style.color = "white";
             divDesc.style.fontSize = "14px";
@@ -32,14 +44,16 @@
             divDesc.style.marginTop = "60px"
             divDesc.style.maxWidth = "80%"
             divDesc.classList.add("descriptionTxt")
-            
+            linkButton.classList.add("buttonlink")
             allcard[idclicked].querySelector<HTMLDivElement>(".cardDivTop")?.appendChild(divDesc);
+            allcard[idclicked].querySelector<HTMLDivElement>(".cardDivTop")?.appendChild(linkButton);
         }else {
             allcard[idclicked].querySelector<HTMLDivElement>(".cardDivTop")!.style.height = "150px";
             allcard[idclicked].querySelector<HTMLButtonElement>(`#${idclick}`)?.setAttribute("data-test", "false");
             let ratio = allcard[idclicked].querySelector<HTMLDivElement>(".descriptionTxt")
+            let rati2o = allcard[idclicked].querySelector<HTMLDivElement>(".buttonlink")
             ratio?.remove();
-            
+            rati2o?.remove();
         }
     }
 
@@ -52,9 +66,19 @@
         <div bind:this={circle} id="circle" />  
         <div id="mainTittleContainer">
             <h1 id="mainTittle">Hi, I'm Jules Besson, <br> Welcome to my portfolio</h1>
+            <h3 id="subtittle">I'm a student in web developpement.</h3>
         </div>
     </div>
-    <div style="display: flex; justify-content: center">
+    <!-- about me -->
+    <div>
+    </div>
+
+
+
+    <!-- about me  -->
+
+    <!-- project cards -->
+    <div style="display: flex; justify-content: center; margin-top: 100px;">
         <div class="projectlistdiv" bind:this={projectlistdiv}>
             {#each projects as items, i}
             <div class="cardivall" id="cardivall{i}">
@@ -67,6 +91,7 @@
             </div>
             {/each}
         </div>
+    <!-- project cards -->
     </div>
 </main>
     
@@ -119,6 +144,16 @@
     #mainTittle {
         font-size: 60px;
         color: white;
+        margin: 0   ;
+        font-family: "Poppins", sans-serif;
+        padding-right: 200px;
+    }
+
+    #subtittle {
+        font-size: 20px;
+        color: white;
+        padding-left: 50px;
+        margin: 0;
         font-family: "Poppins", sans-serif;
         padding-right: 200px;
     }
