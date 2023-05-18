@@ -506,4 +506,5 @@
 
 <svelte:head>
     <title>Jules Besson</title>
+    <meta name="description" content="Jules besson web developer">
 </svelte:head>
