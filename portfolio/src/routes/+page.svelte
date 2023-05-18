@@ -502,3 +502,8 @@
         flex-wrap: wrap;
     }
 </style>
+
+
+<svelte:head>
+    <title>Jules Besson</title>
+</svelte:head>
